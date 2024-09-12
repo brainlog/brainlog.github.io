@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brainlog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Rust Pointers vs C++ Smart Pointers</h1>
+    </header>
+
+    <main>
+
+      <section class="thoughts">
+        <p>
+        Suppose you use smart pointers in your program to avoid memory leaks. But somewhere in your code you made two smart pointers pointing to same data... <br>
+        Multiple Smart Pointers in C++ can take ownership of single data. But when you execute the program, you will get an error saying that you can not free memory two times. 
+        This makes it unsafe compared to Rust where you can only have one mutable ownership possible. Mutable references are references that can modify their data.
+        <pre>
+            <code>
+    int* solve()
+    {
+        int *b = new int(5);    
+        unique_ptr<int> a(b);
+        unique_ptr<int> c(b);
+        return a.get();
+    }
+    int main() {
+        ios_base::sync_with_stdio(0); cin.tie(0);
+        int* p = solve();
+        cout << *p << endl;
+        return 0;
+    }
+            </code>
+        </pre>
+        This code pops an runtime error "free(): double free detected in tcache 2". Now lets look how rust handle this bug at compile time.
+        <pre>
+            <code>
+    let mut s = String::from("hello");
+    let r1 = &mut s;
+    let r2 = &mut s;
+            </code>
+        </pre>   
+        Pops up compile time error "cannot borrow `s` as mutable more than once at a time". This is how rust handles the problem at compile time.
+        Rust will not allow you to have two mutable references to the same data. 
+    </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Brainlog | Computer Science Student</p>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -99,6 +99,21 @@ header p {
     transform: scale(1.05);
 }
 
+.code-snippet {
+    background-color: #2e2e2e;   /* Light gray background for code block */
+    color: #ffffff;                 /* Dark text for contrast */
+    font-family: Consolas, 'Courier New', monospace;  /* Monospace font */
+    padding: 15px;               /* Padding around the code */
+    border: 1px solid #ddd;      /* Light border */
+    border-radius: 5px;          /* Slightly rounded corners */
+    overflow-x: auto;            /* Horizontal scroll for long code */
+    white-space: pre;            /* Preserve whitespace formatting */
+    line-height: 1.5;            /* Increase line height for better readability */
+    font-size: 14px;             /* Medium font size */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Soft shadow for focus */
+  }
+  
+
 /* Thoughts Section */
 .thoughts {
     margin: 40px 0;
