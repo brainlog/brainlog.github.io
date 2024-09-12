@@ -18,8 +18,9 @@
 
       <section class="thoughts">
         <p>
-        Suppose you use smart pointers in your program to avoid memory leaks. But somewhere in your code you made two smart pointers pointing to same data... <br>
-        Multiple Smart Pointers in C++ can take ownership of single data. But when you execute the program, you will get an error saying that you can not free memory two times. 
+        Suppose you use smart pointers in your program to avoid memory leaks. In the below scenario, programmer makes the int *b as unique pointer by wrapping it with unique_ptr a. unique_ptr a will delete the memory of b when control leaves the scope. <br>
+        But now, somewhere in your code you made one more smart pointer c pointing to same data... <br>
+        Multiple Unique Pointers in C++ can take ownership of single data. But when you execute the program, you will get an error saying that you can not free memory two times. 
         This makes it unsafe compared to Rust where you can only have one mutable ownership possible. Mutable references are references that can modify their data.
         <pre>
             <code>
@@ -27,6 +28,7 @@
     {
         int *b = new int(5);    
         unique_ptr<int> a(b);
+        // some long code you forgot about a
         unique_ptr<int> c(b);
         return a.get();
     }
@@ -41,9 +43,9 @@
         This code pops an runtime error "free(): double free detected in tcache 2". Now lets look how rust handle this bug at compile time.
         <pre>
             <code>
-    let mut s = String::from("hello");
-    let r1 = &mut s;
-    let r2 = &mut s;
+    let mut b = String::from("hello");
+    let a = &mut b;
+    let c = &mut b;
             </code>
         </pre>   
         Pops up compile time error "cannot borrow `s` as mutable more than once at a time". This is how rust handles the problem at compile time.
